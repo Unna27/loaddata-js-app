@@ -1,7 +1,28 @@
+:root {
+  --normal-font-weight: 400;
+  --heading-font-weight: 700;
+  --bg-color: #dcd8d0;
+  --normal-textcolor: #0000ff;
+  --para-textcolor: #a52a2a;
+}
+
 body {
+  background-color: var(--bg-color);
+  color: var(--normal-textcolor);
+  font-size: 16px;
+  font-family: 'Satisfy', cursive;
+  font-weight: var(--normal-font-weight);
   text-align: center;
   padding: 10px;
   margin-top: 200px;
-  color: blue;
-  font-size: 16px;
+}
+
+h1 {
+  font-weight: var(--heading-font-weight);
+  text-decoration: underline;
+}
+
+p {
+  background-color: inherit;
+  color: var(--para-textcolor);
 }
