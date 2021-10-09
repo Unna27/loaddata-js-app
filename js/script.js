@@ -1,3 +1,5 @@
+// Declare handle to access table body
+let datalist_row = document.getElementsByClassName('datatlist');
 // An array to store the pokemon details. Objects represent each pokemon properties
 let pokemonList = [];
 let pokemon1 = {name: "Squirtle", height: 0.5, weight: 9, types: ['water']};
@@ -9,6 +11,14 @@ pokemonList = [pokemon1, pokemon2, pokemon3, pokemon4, pokemon5];
 
 console.log(pokemonList);
 // to display all the Pokemon names
+//let datalist_ul = document.createElement('ul');
 for(let i=0; i<pokemonList.length; i++){
-  document.write("<p>" + pokemonList[i].name + "</p>");
+  let li=document.createElement('li');
+  if(pokemonList[i].height > 1.5){
+    li.innerHTML = pokemonList[i].name + ' (height: ' + pokemonList[i].height + ') - Wow, that\'s big!';
+    li.setAttribute("class","spl_pokemon");
+  } else {
+    li.innerHTML = pokemonList[i].name + ' (height: ' + pokemonList[i].height + ')';
+  }
+  datalist_row[0].appendChild(li);
 }

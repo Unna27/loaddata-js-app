@@ -2,8 +2,9 @@
   --normal-font-weight: 400;
   --heading-font-weight: 700;
   --bg-color: #dcd8d0;
-  --normal-textcolor: #0000ff;
+  --normal-textcolor: #00f;
   --para-textcolor: #a52a2a;
+  --spl-pokemoncolor: #800000;
 }
 
 body {
@@ -14,7 +15,7 @@ body {
   font-weight: var(--normal-font-weight);
   text-align: center;
   padding: 10px;
-  margin-top: 200px;
+  margin-top: 50px;
 }
 
 h1 {
@@ -25,4 +26,13 @@ h1 {
 p {
   background-color: inherit;
   color: var(--para-textcolor);
+}
+
+.datatlist {
+  list-style: none;
+}
+
+.spl_pokemon {
+  background-color: inherit;
+  color: var(--spl-pokemoncolor);
 }
