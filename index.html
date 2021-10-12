@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Simple JS Application</title>
-    <!-- Link to CSS file that resets all the styles in the page-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
-    <!-- Link to Google fonts Satisfy -->
-    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-    <!-- Link to CSS Bootstrap file -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Link to CSS file that sets specified styles in the page -->
-    <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
-    <div class="container">
-      <h1>Pokemon List</h1>
-      <ul class="datatlist">
-      </ul>
-    </div>
-    <!-- add Bootstrap js files -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- add link to js file -->
-    <script src="js/script.js" charset="utf-8"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Simple JS Application</title>
+  <!-- Link to CSS file that resets all the styles in the page-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+  <!-- Link to Google fonts Satisfy -->
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <!-- Link to CSS Bootstrap file -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Link to CSS file that sets specified styles in the page -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pokemon List</h1>
+    <ul class="datatlist">
+    </ul>
+  </div>
+  <!-- add search feature -->
+  <div class="input-group">
+    <input type="search" class="form-control rounded" id="search_name" placeholder="Search Pokemon by name"/>
+    <button type="button" class="btn btn-outline-primary" onclick="searchPokemon()">search</button>
+  </div>
+  <!-- add Bootstrap js files -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- add link to js file -->
+  <script src="js/script.js" charset="utf-8"></script>
+</body>
 </html>
