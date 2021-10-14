@@ -1,50 +1,72 @@
-// Declare handles to access the unordered list and seach field name
-let datalist_row = document.getElementsByClassName('datatlist');
-let searchName = document.getElementById('search_name');
-
 // assign pokemonRepository an IIFE
 let pokemonRepository = (function(){
+  // input pokemonList
+  let pokemon1 = {name: "Squirtle", height: 0.5, weight: 9, types: ['water']};
+  let pokemon2 = {name: "Beedrill", height: 1, weight: 29.5, types: ['bug','poison']};
+  let pokemon3 = {name: "Nidoran", height: 0.5, weight: 9, types: ['poison']};
+  let pokemon4 = {name: "Venomoth", height: 1.5, weight: 12.5, types: ['bug','poison']};
+  let pokemon5 = {name: "Meganium", height: 1.8, weight: 100.5, types: ['grass']};
   // An array to store pokemon objects.
-  let pokemonList = [];
-  let validkeys = {name: "Pokemonname", height: 0.0, weight: 0, types: []};
+  let pokemonList = [pokemon1, pokemon2, pokemon3, pokemon4, pokemon5];
   // adds pokemon object to the pokemonList array
   function add(pokemon){
     // check if its an object and has all the required properties/keys
     if(typeof(pokemon) === 'object'){
-      if(Object.keys(validkeys).every((property) => property in pokemon )) {
+      if(("name" in pokemon) && ("height" in pokemon) && ("weight" in pokemon) && ("types" in pokemon)) {
         pokemonList.push(pokemon);
-        return 'success';
+        return 'pokemon details added successfully';
       }else {
-        return 'property_failure';
+        return 'pokemon details not added, as some properties are missing';
       }
     }else {
-      return  'type_failure';
+      return  'provide pokemon details as an object';
     }
   }
   // returns pokemonList array
   function getAll(){
     return pokemonList;
   }
+  // function to display all the Pokemon names in an unordered list
+  function addListItem(pokemon){
+    // Declare handle to access the unordered list
+    let pokemonList = document.querySelector('.pokemon-list');
+    let listitempokemon = document.createElement('li');
+    let pokemonbutton = document.createElement('button');
+    pokemonbutton.classList.add('btn-pokemon');
+    // if height is greater than 1.5, set it as special pokemon
+    if(pokemon.height > 1.5){
+      pokemonbutton.innerText = pokemon.name + '- Wow, that\'s big!';
+      pokemonbutton.classList.add('spl_pokemon');
+    } else {
+      pokemonbutton.innerText = pokemon.name;
+    }
+    listitempokemon.appendChild(pokemonbutton);
+    pokemonList.appendChild(listitempokemon);
+    // call function to add eventlistener
+    addEvents(pokemonbutton, pokemon);
+  }
+  // function to show pokemon details
+  function showDetails(pokemon){
+    console.log(pokemon);
+  }
+  // function to add eventlisteners
+  function addEvents(element, arg){
+    element.addEventListener('click', function(event) {
+      showDetails(arg);
+    });
+  }
   // returns handle to add and getAll functions
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
 })();
-
-// function to display all the Pokemon names that accepts two args (pokemon obj and its index in the array)
-function displayPokemonNames(pokemon, i) {
-  let li=document.createElement('li');
-  // if height is greater than 1.5, set it as special pokemon
-  if(pokemon.height > 1.5){
-    li.innerHTML = (i + 1) + '. '+ pokemon.name + ' (height: ' + pokemon.height + ') - Wow, that\'s big!';
-    li.setAttribute("class","spl_pokemon");
-  } else {
-    li.innerHTML = (i + 1) + '. '+ pokemon.name + ' (height: ' + pokemon.height + ')';
-  }
-  datalist_row[0].appendChild(li);
-}
-
+//add an object to pokemon repository
+alert(pokemonRepository.add({name: "Sunflora", height: 0.8, weight: 8.5, types: ['grass']}));
+// Display pokemonRepository inside unorderedlist
+console.log(pokemonRepository.getAll());
+(pokemonRepository.getAll()).forEach(pokemonRepository.addListItem);
 // function to check if a specific pokemon is in the pokemon repository by providing only its name
 function checkPokemonByName(pokemonList,name){
   return pokemonList.filter(function(pokemon) {
@@ -55,6 +77,8 @@ function checkPokemonByName(pokemonList,name){
 }
 // invoke checkPokemonByName with search query
 function searchPokemon() {
+  // Declare handle to access the seach field name
+  let searchName = document.getElementById('search_name');
   if(searchName.value === ""){
     alert('Please enter a Pokemon name to be searched.');
   }else {
@@ -67,38 +91,3 @@ function searchPokemon() {
     }
   }
 }
-// input pokemonList
-let pokemon1 = {name: "Squirtle", height: 0.5, weight: 9, types: ['water']};
-let pokemon2 = {name: "Beedrill", height: 1, weight: 29.5, types: ['bug','poison']};
-let pokemon3 = {name: "Nidoran", height: 0.5, weight: 9, types: ['poison']};
-let pokemon4 = {name: "Venomoth", height: 1.5, weight: 12.5, types: ['bug','poison']};
-let pokemon5 = {name: "Meganium", height: 1.8, weight: 100.5, types: ['grass']};
-let inputPokemonList = [pokemon1, pokemon2, pokemon3, pokemon4, pokemon5, "test"];
-let success_index = [];
-let property_failure_index = [];
-let type_failure_index = [];
-// add pokemonList to the repository array
-for (let i = 0; i < 6; i++){
-  let captureMessage = pokemonRepository.add(inputPokemonList[i]);
-  if (captureMessage === "success") {
-    success_index.push(i);
-  } else if (captureMessage === "property_failure") {
-    property_failure_index.push(i);
-  }
-  else {
-    type_failure_index.push(i);
-  }
-}
-// display alert message to tell the status of pokemon addition to the repository from the input list
-if(success_index.length !== 0){
-  alert("Pokemons at the following indexes are added successfully.\n" + success_index);
-}
-if(property_failure_index.length !== 0){
-  alert("Pokemons at the following indexes are not added due to some of the missing properties.\n" + property_failure_index);
-}
-if(type_failure_index.length !== 0){
-  alert("Pokemons at the following indexes are not added as its not an object.\n" + type_failure_index);
-}
-// for each element in the pokemonlist invoke displayPokemonNames function to display its details
-//console.log(pokemonRepository.getAll());
-(pokemonRepository.getAll()).forEach(displayPokemonNames);

@@ -5,6 +5,7 @@
   --normal-textcolor: #00f;
   --para-textcolor: #a52a2a;
   --spl-pokemoncolor: #800000;
+  --btn-textcolor: #000;
 }
 
 body {
@@ -13,14 +14,13 @@ body {
   font-size: 16px;
   font-family: 'Satisfy', cursive;
   font-weight: var(--normal-font-weight);
-  text-align: center;
-  padding: 10px;
-  margin-top: 50px;
 }
 
 h1 {
   font-weight: var(--heading-font-weight);
   text-decoration: underline;
+  font-size: 28px;
+  margin-left: 20px;
 }
 
 p {
@@ -28,8 +28,18 @@ p {
   color: var(--para-textcolor);
 }
 
-.datatlist {
-  list-style: none;
+.pokemon-list {
+  list-style: circle;
+}
+
+.btn-pokemon {
+  background-color: inherit;
+  color: var(--btn-textcolor);
+  text-align: center;
+  display: inline-block;
+  padding: 5px;
+  margin: 4px 2px;
+  border-radius: 5px;
 }
 
 .spl_pokemon {
