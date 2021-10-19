@@ -14,20 +14,28 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
+  <p class="hidden">Pokemon List is being loaded from API</p>
+  <div id="search-list" class="container">
     <h1>Pokedex</h1>
-    <ul class="pokemon-list">
-    </ul>
+    <!-- uses logic from list.js file -->
+    <input class="search" placeholder="Search">
+    <span class="sort" data-sort="pokemon-namebtn">Sort</span>
+    <!-- placeholder list to display pokemon names -->
+    <ul class="list"></ul>
   </div>
-  <!-- add search feature -->
-  <div class="input-group">
-    <input type="search" class="form-control rounded" id="search_name" placeholder="Search Pokemon by name"/>
-    <button type="button" class="btn btn-outline-primary" onclick="searchPokemon()">search</button>
+  <div id="display">
+
   </div>
+
   <!-- add Bootstrap js files -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- add promise and fetch polyfill js files to add code automatically for browsers that don't support Promises -->
+  <script src="js/promise-polyfill.js" charset="utf-8"></script>
+  <script src="js/fetch-polyfill.js" charset="utf-8"></script>
+  <!-- add List js file for search feature -->
+  <script src="js/list.js" charset="utf-8"></script>
   <!-- add link to js file -->
   <script src="js/script.js" charset="utf-8"></script>
 </body>

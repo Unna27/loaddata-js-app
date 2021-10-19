@@ -1,93 +1,147 @@
 // assign pokemonRepository an IIFE
 let pokemonRepository = (function(){
-  // input pokemonList
-  let pokemon1 = {name: "Squirtle", height: 0.5, weight: 9, types: ['water']};
-  let pokemon2 = {name: "Beedrill", height: 1, weight: 29.5, types: ['bug','poison']};
-  let pokemon3 = {name: "Nidoran", height: 0.5, weight: 9, types: ['poison']};
-  let pokemon4 = {name: "Venomoth", height: 1.5, weight: 12.5, types: ['bug','poison']};
-  let pokemon5 = {name: "Meganium", height: 1.8, weight: 100.5, types: ['grass']};
   // An array to store pokemon objects.
-  let pokemonList = [pokemon1, pokemon2, pokemon3, pokemon4, pokemon5];
+  let pokemonList = [];
+  // fetch API url
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+
   // adds pokemon object to the pokemonList array
   function add(pokemon){
     // check if its an object and has all the required properties/keys
     if(typeof(pokemon) === 'object'){
-      if(("name" in pokemon) && ("height" in pokemon) && ("weight" in pokemon) && ("types" in pokemon)) {
+      if(("name" in pokemon) && ("detailsUrl" in pokemon)) {
         pokemonList.push(pokemon);
         return 'pokemon details added successfully';
       }else {
         return 'pokemon details not added, as some properties are missing';
       }
     }else {
-      return  'provide pokemon details as an object';
+      return 'provide pokemon details as an object';
     }
   }
+
   // returns pokemonList array
   function getAll(){
     return pokemonList;
   }
+
   // function to display all the Pokemon names in an unordered list
   function addListItem(pokemon){
     // Declare handle to access the unordered list
-    let pokemonList = document.querySelector('.pokemon-list');
+    let pokemonList = document.querySelector('.list');
     let listitempokemon = document.createElement('li');
     let pokemonbutton = document.createElement('button');
-    pokemonbutton.classList.add('btn-pokemon');
-    // if height is greater than 1.5, set it as special pokemon
-    if(pokemon.height > 1.5){
-      pokemonbutton.innerText = pokemon.name + '- Wow, that\'s big!';
-      pokemonbutton.classList.add('spl_pokemon');
-    } else {
-      pokemonbutton.innerText = pokemon.name;
-    }
+    pokemonbutton.classList.add('pokemon-namebtn');
+    pokemonbutton.innerText = pokemon.name;
     listitempokemon.appendChild(pokemonbutton);
     pokemonList.appendChild(listitempokemon);
     // call function to add eventlistener
     addEvents(pokemonbutton, pokemon);
   }
+
+  // function to fetch the list from api
+  function loadList() {
+    showLoadingMessage();
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json){
+      json.results.forEach(function (item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+
+  // function to load the details of pokemon based on the detailsUrl
+  function loadDetails(item) {
+    let url = item.detailsUrl;
+    showLoadingMessage();
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (jsondetails) {
+      // Now add the details to the pokemon item
+      item.imageUrl = jsondetails.sprites.front_default;
+      item.height = jsondetails.height;
+      item.weight = jsondetails.weight;
+      item.types = jsondetails.types;
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+
+  // function to display the imageUrl
+  function displayImg(imgUrl){
+    let img = new Image();
+    let divcontainer = document.getElementById('display');
+    img.onload = function() {
+      divcontainer.innerHTML += '<img src="'+img.src+'" />';
+    };
+    img.src=imgUrl;
+  }
+  
   // function to show pokemon details
   function showDetails(pokemon){
-    console.log(pokemon);
+    loadDetails(pokemon).then(function () {
+      hideLoadingMessage();
+      displayImg(pokemon.imageUrl);
+      console.log(pokemon.imageUrl);
+      console.log(pokemon);
+    }).catch(function (e) {
+      hideLoadingMessage();
+      console.error(e);
+    });
   }
+
   // function to add eventlisteners
   function addEvents(element, arg){
-    element.addEventListener('click', function(event) {
+    element.addEventListener('click', function (event) {
       showDetails(arg);
     });
   }
+
   // returns handle to add and getAll functions
   return {
     add: add,
     getAll: getAll,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails
   };
 })();
-//add an object to pokemon repository
-alert(pokemonRepository.add({name: "Sunflora", height: 0.8, weight: 8.5, types: ['grass']}));
-// Display pokemonRepository inside unorderedlist
-console.log(pokemonRepository.getAll());
-(pokemonRepository.getAll()).forEach(pokemonRepository.addListItem);
-// function to check if a specific pokemon is in the pokemon repository by providing only its name
-function checkPokemonByName(pokemonList,name){
-  return pokemonList.filter(function(pokemon) {
-    if(pokemon.name.toLowerCase() === name.toLowerCase()) {
-          return pokemon;
-      }
+
+// Search feature -- provide the class name of the pokemonbutton, as the list will be searched by pokemon names
+// item specifies a default placeholder of how the list looks before initialization
+let options = {
+  valueNames: [ 'pokemon-namebtn' ],
+  item: '<li><button class="pokemon-namebtn"></button></li>'
+};
+
+// function to display a loading message
+let displayMsg = document.querySelector('p');
+function showLoadingMessage() {
+  displayMsg.classList.remove('hidden');
+}
+function hideLoadingMessage() {
+  displayMsg.classList.add('hidden');
+}
+
+// invoke the loadList function, then cretae a DOM to display them in the page by calling addListItem function
+pokemonRepository.loadList().then(function () {
+  // Now the pokemondatalist will be loaded
+  hideLoadingMessage();
+  //let searchList = new List('search-list');
+  pokemonRepository.getAll().forEach(function (pokemonitem) {
+    pokemonRepository.addListItem(pokemonitem);
   });
-}
-// invoke checkPokemonByName with search query
-function searchPokemon() {
-  // Declare handle to access the seach field name
-  let searchName = document.getElementById('search_name');
-  if(searchName.value === ""){
-    alert('Please enter a Pokemon name to be searched.');
-  }else {
-    let searchResult = checkPokemonByName(pokemonRepository.getAll(),searchName.value);
-    console.log(searchResult);
-    if(searchResult.length === 0){
-      alert('Pokemon ' + searchName.value + ' not found');
-    }else {
-      alert('Pokemon ' + searchName.value + ' found');
-    }
-  }
-}
+  let searchPokemonList = new List('search-list', options);
+}).catch(function (e) {
+  hideLoadingMessage();
+  console.error(e);
+})
+console.log(pokemonRepository.getAll());
