@@ -20,7 +20,7 @@
 
 
 ## Technologies Used
-- HTML, CSS, Javascript - version 1.0
+- HTML, CSS, Javascript, Bootstrap - version 1.0
 
 
 ## Features
@@ -28,6 +28,7 @@ List the ready features here:
 - Load Data from an external source (API)
 - View a list of items
 - On user action (e.g., by clicking on a list item), view details for that item
+- Search and Sort functionality
 
 
 ## Screenshots
@@ -50,8 +51,8 @@ Room for improvement:
 - Error-handling
 
 To do:
-- Load data from external API
-- Provide search feature
+- Enhance look and feel of UI
+
 
 
 ## Acknowledgements
