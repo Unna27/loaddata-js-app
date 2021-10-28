@@ -4,6 +4,10 @@
   --normal-textcolor: #00f;
   --sort-bgcolor: #28a8e0;
   --sort-hover: #1b8aba;
+  --modal-bgcolor: #f5f5dc;
+  --modal-body: #e6e6fa;
+  --nav-bgcolor: #e3f2fd;
+  --button-bgcolor: #deb887;
 }
 
 body {
@@ -18,12 +22,19 @@ body {
   padding-top: 70px;
 }
 
-h1 {
-  font-size: 1.5rem;
+.navbar {
+  background-color: var(--nav-bgcolor);
+  color: var(--normal-textcolor);
 }
 
-.btn-primary {
-  background-color: var(--bg-color);
+/* to set logo dimensions */
+.d-inline-block {
+  width: 30px;
+  height: 30px;
+}
+
+.navbar-text {
+  flex-grow: 1;
 }
 
 .hidden {
@@ -38,7 +49,7 @@ h1 {
   color: #fff;
   text-decoration: none;
   background-color: var(--sort-bgcolor);
-  height: 40px;
+  height: 35px;
 }
 
 .sort:hover {
@@ -58,7 +69,7 @@ h1 {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid transparent;
-  content: "";
+  content: '';
   position: relative;
   top: -10px;
   right: -5px;
@@ -70,7 +81,7 @@ h1 {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid #fff;
-  content: "";
+  content: '';
   position: relative;
   top: 13px;
   right: -5px;
@@ -82,8 +93,34 @@ h1 {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid #fff;
-  content: "";
+  content: '';
   position: relative;
   top: -10px;
   right: -5px;
+}
+
+.list {
+  padding: 5px;
+}
+
+.list-group-item {
+  width: 250px;
+  margin: 0 auto;
+  padding: 0.05em;
+}
+
+.btn-primary {
+  background-color: var(--button-bgcolor);
+  color: var(--normal-textcolor);
+}
+
+.modal-header,
+.modal-footer {
+  background-color: var(--modal-bgcolor);
+  color: var(--normal-textcolor);
+}
+
+.modal-body {
+  background-color: var(--modal-body);
+  color: var(--normal-textcolor);
 }
