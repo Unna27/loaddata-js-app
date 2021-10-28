@@ -19,7 +19,7 @@
 
 
 ## Technologies Used
-- HTML, CSS, Javascript, Bootstrap - version 1.0
+- HTML, CSS, Javascript, Bootstrap - version 4.0
 
 
 ## Features
