@@ -7,7 +7,6 @@
 * [Features](#features)
 * [Screenshots](#screenshots)
 * [Setup](#setup)
-* [Usage](#usage)
 * [Project Status](#project-status)
 * [Room for Improvement](#room-for-improvement)
 * [Acknowledgements](#acknowledgements)
@@ -33,30 +32,24 @@ List the ready features here:
 
 ## Screenshots
 
+<img width="694" alt="pokedexapp" src="https://user-images.githubusercontent.com/58221568/139307514-59e72f3c-ae4f-48c5-aa24-7ccc6394c2d1.png">
 
 ## Setup
 Project Requirements are listed in requiremenst.txt file.
 
-## Usage
-
-
 ## Project Status
-Project is: _in progress_ 
+Project is: _completed_ 
 
 
 ## Room for Improvement
-
-Room for improvement:
-- Load indicators
-- Error-handling
 
 To do:
 - Enhance look and feel of UI
 
 
-
 ## Acknowledgements
-
+* This project was based on the CareerFoundry tutorial (https://careerfoundry.com/en/courses/become-a-web-developer/)
+* Many thanks to my Mentor (Renish Bhaskaran) and my Tutor (Blaise Bakundukize) for offering me timely feedback and support to shape my project.
 
 
 ## Contact
