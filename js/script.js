@@ -117,13 +117,6 @@ const pokemonRepository = (function() {
   };
 })();
 
-// Search feature -- provide the class name of the pokemonbutton, as the list will be searched by pokemon names
-// item specifies a default placeholder of how the list looks before initialization
-let options = {
-  valueNames: ['pokemon-namebtn'],
-  item: '<li><button class="pokemon-namebtn"></button></li>'
-};
-
 // function to display a loading message
 let displayMsg = document.querySelector('p');
 function showLoadingMessage() {
@@ -144,7 +137,6 @@ pokemonRepository
     pokemonRepository.getAll().forEach(function(pokemonitem) {
       pokemonRepository.addListItem(pokemonitem);
     });
-    new List('search-list', options); // to enable automatic searching
   })
   .catch(function(e) {
     hideLoadingMessage();
