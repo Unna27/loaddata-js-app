@@ -16,22 +16,23 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <!-- Link to CSS file that sets specified styles in the page -->
-    <link href="dist/loaddatastyle-min.css" rel="stylesheet" />
+    <!-- Link to CSS file that sets specified styles in the page
+    <link href="dist/loaddatastyle-min.css" rel="stylesheet" /> -->
+    <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
     <!-- fixed Navigation bar -->
-    <nav class="navbar fixed-top">
-      <a class="navbar-brand" href="#">
-        <img
-          src="img/pokemon_logo.png"
-          class="d-inline-block align-top"
-          alt="pokemon image"
-        />
-      </a>
-      <span class="navbar-text">
-        Pokedex
-      </span>
+    <nav class="navbar bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="img/pokemon_logo.png"
+            alt="pokemon image"
+            class="d-inline-block align-text-top"
+          />
+          Pokedex
+        </a>
+      </div>
     </nav>
     <p class="hidden">Pokemon List is being loaded from API</p>
 

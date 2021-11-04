@@ -22,19 +22,14 @@ body {
   padding-top: 70px;
 }
 
+.d-inline-block {
+  height: 35px;
+  width: 35px;
+}
+
 .navbar {
   background-color: var(--nav-bgcolor);
   color: var(--normal-textcolor);
-}
-
-/* to set logo dimensions */
-.d-inline-block {
-  width: 30px;
-  height: 30px;
-}
-
-.navbar-text {
-  flex-grow: 1;
 }
 
 .hidden {
@@ -43,12 +38,15 @@ body {
 
 .list {
   padding: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 245px);
+  gap: 5px;
 }
 
 .list-group-item {
-  width: 250px;
+  width: 245px;
   margin: 0 auto;
-  padding: 0.05em;
+  padding: 0.25em;
 }
 
 .btn-primary {
