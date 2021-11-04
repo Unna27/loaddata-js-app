@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 // assign pokemonRepository an IIFE
-let pokemonRepository = (function() {
+const pokemonRepository = (function() {
   // An array to store pokemon objects.
-  let pokemonList = [];
+  const pokemonList = [];
   // fetch API url
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  const apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
   // adds pokemon object to the pokemonList array
   function add(pokemon) {
     // check if its an object and has all the required properties/keys
@@ -28,9 +28,9 @@ let pokemonRepository = (function() {
   // function to display all the Pokemon names in an unordered list
   function addListItem(pokemon) {
     // Declare handle to access the unordered list
-    let pokemonList = document.querySelector('.list');
-    let listitempokemon = document.createElement('li');
-    let pokemonbutton = document.createElement('button');
+    const pokemonList = document.querySelector('.list');
+    const listitempokemon = document.createElement('li');
+    const pokemonbutton = document.createElement('button');
     listitempokemon.classList.add('list-group-item');
     pokemonbutton.classList.add(
       'pokemon-namebtn',
@@ -50,70 +50,38 @@ let pokemonRepository = (function() {
   }
 
   // function to fetch the list from api
-  function loadList() {
+  async function loadList() {
     showLoadingMessage();
-    return fetch(apiUrl)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(json) {
-        json.results.forEach(function(item) {
-          let pokemon = {
-            name: item.name,
-            detailsUrl: item.url
-          };
-          add(pokemon);
-        });
-      })
-      .catch(function(e) {
-        console.error(e);
+    try {
+      const response = await fetch(apiUrl);
+      const json = await response.json();
+      json.results.forEach(function(item) {
+        let pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add(pokemon);
       });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   // function to load the details of pokemon based on the detailsUrl
-  function loadDetails(item) {
+  async function loadDetails(item) {
     let url = item.detailsUrl;
     showLoadingMessage();
-    return fetch(url)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(jsondetails) {
-        // Now add the details to the pokemon item
-        item.imageUrl = jsondetails.sprites.front_default;
-        item.height = jsondetails.height;
-        item.weight = jsondetails.weight;
-        item.types = jsondetails.types;
-      })
-      .catch(function(e) {
-        console.error(e);
-      });
-  }
-
-  // function to display Pokemon details in a modal box
-  function showModal(pokemon) {
-    let modalBody = document.querySelector('.modal-body');
-    let modalTitle = document.querySelector('.modal-title');
-    // empty the title and content
-    modalTitle.innerHTML = '';
-    modalBody.innerHTML = '';
-
-    let pkName = document.createElement('h1');
-    pkName.innerText = pokemon.name;
-
-    let pkHeight = document.createElement('p');
-    pkHeight.innerText = 'Height: ' + pokemon.height;
-
-    let pkWeight = document.createElement('p');
-    pkWeight.innerText = 'Weight: ' + pokemon.weight;
-
-    let pkImage = document.createElement('img');
-    pkImage.src = pokemon.imageUrl;
-
-    modalTitle.appendChild(pkName);
-    modalBody.appendChild(pkHeight);
-    modalBody.appendChild(pkWeight);
-    modalBody.appendChild(pkImage);
+    try {
+      const response = await fetch(url);
+      const jsondetails = await response.json();
+      // Now add the details to the pokemon item
+      item.imageUrl = jsondetails.sprites.front_default;
+      item.height = jsondetails.height;
+      item.weight = jsondetails.weight;
+      item.types = jsondetails.types;
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   // function to show pokemon details
@@ -121,7 +89,7 @@ let pokemonRepository = (function() {
     loadDetails(pokemon)
       .then(function() {
         hideLoadingMessage();
-        //call showModal function
+        //call showModal function in modal.js file
         showModal(pokemon);
         //console.log(pokemon);
       })
@@ -140,12 +108,12 @@ let pokemonRepository = (function() {
 
   // returns handle to add and getAll functions
   return {
-    add: add,
-    getAll: getAll,
-    addListItem: addListItem,
-    loadList: loadList,
-    loadDetails: loadDetails,
-    showDetails: showDetails
+    add,
+    getAll,
+    addListItem,
+    loadList,
+    loadDetails,
+    showDetails
   };
 })();
 
@@ -161,9 +129,11 @@ let displayMsg = document.querySelector('p');
 function showLoadingMessage() {
   displayMsg.classList.remove('hidden');
 }
+
 function hideLoadingMessage() {
   displayMsg.classList.add('hidden');
 }
+
 // invoke the loadList function, then cretae a DOM to display them in the page by calling addListItem function
 pokemonRepository
   .loadList()
@@ -174,9 +144,10 @@ pokemonRepository
     pokemonRepository.getAll().forEach(function(pokemonitem) {
       pokemonRepository.addListItem(pokemonitem);
     });
-    let searchPokemonList = new List('search-list', options); //eslint-disable-line
+    new List('search-list', options); // to enable automatic searching
   })
   .catch(function(e) {
     hideLoadingMessage();
     console.error(e);
   });
+$('.list').sortable(); // added to make list items sortable based on mouse events
