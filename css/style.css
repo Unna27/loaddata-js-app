@@ -8,6 +8,7 @@
   --modal-body: #e6e6fa;
   --nav-bgcolor: #e3f2fd;
   --button-bgcolor: #deb887;
+  --button-visitedcolor: #ead1dc;
 }
 
 body {
@@ -52,6 +53,11 @@ body {
 .btn-primary {
   background-color: var(--button-bgcolor);
   color: var(--normal-textcolor);
+}
+
+.btn_visited {
+  background-color: var(--button-visitedcolor);
+  color: inherit;
 }
 
 .modal-header,

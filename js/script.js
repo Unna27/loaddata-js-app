@@ -102,6 +102,7 @@ const pokemonRepository = (function() {
   // function to add eventlisteners
   function addEvents(element, arg) {
     element.addEventListener('click', function() {
+      element.classList.add('btn_visited');
       showDetails(arg);
     });
   }
