@@ -34,7 +34,8 @@ List the ready features here:
 
 ## Screenshots
 
-<img width="694" alt="pokedexapp" src="https://user-images.githubusercontent.com/58221568/139307514-59e72f3c-ae4f-48c5-aa24-7ccc6394c2d1.png">
+![image](https://user-images.githubusercontent.com/58221568/143219103-dff4b14d-66bd-477e-a40c-f5a2376f00df.png)
+
 
 ## Setup
 
