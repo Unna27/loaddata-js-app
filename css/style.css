@@ -7,7 +7,7 @@
   --modal-bgcolor: #f5f5dc;
   --modal-body: #e6e6fa;
   --nav-bgcolor: #e3f2fd;
-  --button-bgcolor: #deb887;
+  --button-bgcolor: #eedcc5;
   --button-visitedcolor: #ead1dc;
 }
 
@@ -24,8 +24,8 @@ body {
 }
 
 .d-inline-block {
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
 }
 
 .navbar {

@@ -57,7 +57,7 @@ const pokemonRepository = (function() {
       const json = await response.json();
       json.results.forEach(function(item) {
         let pokemon = {
-          name: item.name,
+          name: item.name.charAt(0).toUpperCase() + item.name.slice(1),
           detailsUrl: item.url
         };
         add(pokemon);
@@ -118,12 +118,13 @@ const pokemonRepository = (function() {
   };
 })();
 
-// function to display a loading message
+// function to display a loading message and a spinner
 let displayMsg = document.querySelector('p');
 function showLoadingMessage() {
   displayMsg.classList.remove('hidden');
 }
 
+// function to hide loading message and spinner
 function hideLoadingMessage() {
   displayMsg.classList.add('hidden');
 }
